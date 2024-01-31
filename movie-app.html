@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <form id="movie-form">
+        <input id="movie-title" type="text" placeholder="movie title">
+        <input id="movie-rating" type="number" placeholder="rating" min="0" max="10" style="width: 65px">
+        <button>submit</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>movie titles</th>
+                <th>movie ratings</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+<script>
+    $('#movie-form').on('submit', function (event) {
+        //prevent the page from refreshing after i submit
+        event.preventDefault();
+        let movie = $('#movie-title').val();
+        let rating = $('#movie-rating').val();
+
+        //adding the movie data to the table with the remove button
+        $('tbody').append(`<tr><td>${movie}</td><td>${rating}</td><td><button class="remove-btn">remove</button></td></tr>`);
+        
+        //clearing the empty form 
+        $('#movie-title').val('');
+        $('#movie-rating').val('');
+    })
+
+    // Remove the closest parent 'tr' of the clicked button
+    $('tbody').on('click', 'button', function() {
+        $(this).closest('tr').remove();
+    });
+</script>    
+    
+</body>
+</html>
